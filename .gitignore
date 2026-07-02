@@ -23,6 +23,9 @@ models/*
 *.log
 crash.log
 
+# Archives
+*.zip
+
 # IDE settings
 .vscode/
 .idea/
