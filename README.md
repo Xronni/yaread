@@ -10,7 +10,7 @@
 
 <p align="center">
   <!-- Place your demo.gif in the project root folder and it will render below -->
-  <img src="demo.gif" alt="YaRead Demo" width="600">
+  <img src="assets/demo.gif" alt="YaRead Demo" width="600">
 </p>
 
 <p align="center">
