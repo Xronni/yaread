@@ -1,0 +1,33 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.venv/
+venv/
+ENV/
+env/
+
+# PyInstaller / Build outputs
+build/
+dist/
+
+# Local AI Models (too heavy for GitHub)
+models/*.gguf
+models/*
+!models/README.md
+
+# Log files
+*.log
+crash.log
+
+# Archives
+*.zip
+
+# IDE settings
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
