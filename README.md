@@ -15,7 +15,7 @@
 
 <p align="center">
   <a href="https://boosty.to/xronni/single-payment/donation/809763/target?share=target_link"><img src="https://img.shields.io/badge/Boosty-Support%20Project-orange?style=flat&logo=boosty" alt="Support on Boosty"></a>
-  <img src="https://img.shields.io/badge/License-Proprietary-red" alt="License: Proprietary EULA">
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License: MIT">
   <img src="https://img.shields.io/badge/Python-3.10%2B-blue?logo=python" alt="Python 3.10+">
 </p>
 
@@ -162,3 +162,9 @@ If you like YaRead, you can support development by donating:
 Если вам нравится YaRead, вы можете поддержать разработку:
 
 * 🍊 **[Boosty (Support YaRead)](https://boosty.to/xronni/single-payment/donation/809763/target?share=target_link)**
+
+---
+
+## 📄 License
+Released under the [MIT License](LICENSE.md).
+
