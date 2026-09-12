@@ -42,7 +42,7 @@ BASE_DIR = get_resource_path("")
 
 try:
     import ctypes
-    myappid = "yateam.yaread.app.1.0"
+    myappid = "yateam.yaread.app.1.1"
     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(
         ctypes.c_wchar_p(myappid)
     )
@@ -1698,11 +1698,34 @@ class YaReadApp(QMainWindow):
                 soup = _BS(html_data, 'html.parser')
                 text = soup.get_text(separator='\n')
             except ImportError:
-                text = re.sub(r'<style.*?>.*?</style>', '', html_data, flags=re.IGNORECASE | re.DOTALL)
-                text = re.sub(r'<script.*?>.*?</script>', '', text, flags=re.IGNORECASE | re.DOTALL)
-                text = re.sub(r'<[^>]+>', '\n', text)
-                import html as html_lib
-                text = html_lib.unescape(text)
+                from html.parser import HTMLParser
+
+                class _SimpleHTMLTextExtractor(HTMLParser):
+                    def __init__(self):
+                        super().__init__()
+                        self._pieces = []
+                        self._ignore = False
+
+                    def handle_starttag(self, tag, attrs):
+                        if tag.lower() in ('script', 'style'):
+                            self._ignore = True
+
+                    def handle_endtag(self, tag):
+                        if tag.lower() in ('script', 'style'):
+                            self._ignore = False
+                        elif tag.lower() in ('p', 'br', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'li', 'tr'):
+                            self._pieces.append('\n')
+
+                    def handle_data(self, data):
+                        if not self._ignore:
+                            self._pieces.append(data)
+
+                    def get_text(self):
+                        return ''.join(self._pieces)
+
+                parser = _SimpleHTMLTextExtractor()
+                parser.feed(html_data)
+                text = parser.get_text()
             
             text = re.sub(r'[\x00-\x09\x0b-\x1f\x7f-\x9f]', '', text)
             text = re.sub(r'\n{3,}', '\n\n', text)

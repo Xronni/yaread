@@ -52,18 +52,18 @@ sudo apt update && sudo apt install -y python3 python3-pyqt6 python3-pygame pyth
 ```
 
 #### Option A: Install Debian / Ubuntu Package (.deb) — Recommended
-Download `yaread_1.0.0_all.deb` from the **[Releases](https://github.com/Xronni/yaread/releases/latest)** section and install:
+Download `yaread_1.1.0_all.deb` from the **[Releases](https://github.com/Xronni/yaread/releases/latest)** section and install:
 ```bash
-sudo dpkg -i yaread_1.0.0_all.deb
+sudo dpkg -i yaread_1.1.0_all.deb
 sudo apt install -f  # automatically install dependencies if needed
 ```
 Launch `YaRead` from your application launcher or type `yaread` in the terminal.
 
 #### Option B: Standalone Portable Linux Archive or Git Clone
-1. Download `yaread-v1.0.0-linux-x86_64.tar.gz` from **[Releases](https://github.com/Xronni/yaread/releases/latest)** (or clone the repository):
+1. Download `yaread-v1.1.0-linux-x86_64.tar.gz` from **[Releases](https://github.com/Xronni/yaread/releases/latest)** (or clone the repository):
    ```bash
-   tar -xzf yaread-v1.0.0-linux-x86_64.tar.gz
-   cd yaread-1.0.0
+   tar -xzf yaread-v1.1.0-linux-x86_64.tar.gz
+   cd yaread-1.1.0
    ```
 2. Run the application:
    ```bash
@@ -166,18 +166,18 @@ sudo apt update && sudo apt install -y python3 python3-pyqt6 python3-pygame pyth
 ```
 
 #### Вариант А: Установка пакета Debian / Ubuntu (.deb) — Рекомендуется
-Скачайте `yaread_1.0.0_all.deb` со страницы **[Релизов](https://github.com/Xronni/yaread/releases/latest)** и выполните:
+Скачайте `yaread_1.1.0_all.deb` со страницы **[Релизов](https://github.com/Xronni/yaread/releases/latest)** и выполните:
 ```bash
-sudo dpkg -i yaread_1.0.0_all.deb
+sudo dpkg -i yaread_1.1.0_all.deb
 sudo apt install -f  # автоматическая установка зависимостей при необходимости
 ```
 После установки приложение появится в меню вашей системы или запустится командой `yaread`.
 
 #### Вариант Б: Портативный запуск для Linux или сборка из Git
-1. Скачайте архив `yaread-v1.0.0-linux-x86_64.tar.gz` со страницы **[Релизов](https://github.com/Xronni/yaread/releases/latest)** (или клонируйте репозиторий):
+1. Скачайте архив `yaread-v1.1.0-linux-x86_64.tar.gz` со страницы **[Релизов](https://github.com/Xronni/yaread/releases/latest)** (или клонируйте репозиторий):
    ```bash
-   tar -xzf yaread-v1.0.0-linux-x86_64.tar.gz
-   cd yaread-1.0.0
+   tar -xzf yaread-v1.1.0-linux-x86_64.tar.gz
+   cd yaread-1.1.0
    ```
 2. Запустите читалку:
    ```bash
