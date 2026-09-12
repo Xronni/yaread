@@ -1,0 +1,8 @@
+PyQt6>=6.4.0
+pygame>=2.5.0
+PyMuPDF>=1.23.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+EbookLib>=0.18
+# Optional for local offline AI:
+# llama-cpp-python>=0.2.70

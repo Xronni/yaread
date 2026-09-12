@@ -13,6 +13,8 @@ env/
 # PyInstaller / Build outputs
 build/
 dist/
+release/
+build_artifacts/
 
 # Local AI Models (too heavy for GitHub)
 models/*.gguf
@@ -23,8 +25,10 @@ models/*
 *.log
 crash.log
 
-# Archives
+# Archives & Packages
 *.zip
+*.tar.gz
+*.deb
 
 # IDE settings
 .vscode/

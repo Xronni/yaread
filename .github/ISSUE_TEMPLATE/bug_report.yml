@@ -1,0 +1,75 @@
+name: 🐛 Bug Report
+description: Report an issue, rendering bug, or soundtrack error in YaRead
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug! Please fill out the information below to help us diagnose and fix it.
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
+      placeholder: Describe what happened (e.g. PDF failed to open, music didn't loop, local GGUF model crashed)...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce the issue?
+      placeholder: |
+        1. Launch YaRead with ./run.sh
+        2. Open file 'example.pdf'
+        3. Click on ...
+        4. See error ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen instead?
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System / Platform
+      options:
+        - Ubuntu 24.04 / 22.04 LTS (.deb package)
+        - Ubuntu / Debian (Standalone archive or git)
+        - Arch Linux / Manjaro
+        - Fedora
+        - Windows 11 / 10
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: file_format
+    attributes:
+      label: Book Format
+      options:
+        - PDF
+        - EPUB
+        - FB2
+        - Other / Not related to a file
+    validations:
+      required: false
+  - type: input
+    id: ai_mode
+    attributes:
+      label: AI Provider / Mode
+      placeholder: e.g. Local GGUF (Qwen 2.5), OpenAI, Gemini, DeepSeek, or None
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Terminal Output / Console Error Logs
+      description: Paste any error messages from the terminal or crash output.
+      render: shell
+    validations:
+      required: false

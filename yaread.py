@@ -52,8 +52,21 @@ except Exception:
 app = QApplication(sys.argv)
 app.setApplicationName("YaRead")
 app.setOrganizationName("YaTeam")
+if hasattr(app, 'setDesktopFileName'):
+    app.setDesktopFileName("yaread.desktop")
 
-icon_path = get_resource_path("icon.ico")
+if sys.platform != "win32":
+    try:
+        user_models_dir = os.path.expanduser("~/.local/share/yaread/models")
+        os.makedirs(user_models_dir, exist_ok=True)
+    except Exception:
+        pass
+
+icon_path = get_resource_path("icon.png")
+if not os.path.exists(icon_path):
+    icon_path = get_resource_path("assets/icon.png")
+if not os.path.exists(icon_path):
+    icon_path = get_resource_path("icon.ico")
 app_icon = QIcon(icon_path) if os.path.exists(icon_path) else QIcon()
 
 if os.path.exists(icon_path):
@@ -530,7 +543,11 @@ class CustomTitleBar(QFrame):
         
         self.icon_label = QLabel()
         
-        icon_path = get_resource_path("icon.ico").replace('\\', '/')
+        icon_path = get_resource_path("icon.png")
+        if not os.path.exists(icon_path):
+            icon_path = get_resource_path("assets/icon.png")
+        if not os.path.exists(icon_path):
+            icon_path = get_resource_path("icon.ico").replace('\\', '/')
         if os.path.exists(icon_path):
             self.icon_label.setPixmap(QIcon(icon_path).pixmap(16, 16))
             
@@ -1039,7 +1056,19 @@ class LlamaWorker(QThread):
                         exe_dir = os.path.dirname(sys.executable)
                     else:
                         exe_dir = os.path.dirname(os.path.abspath(__file__))
-                    actual_path = os.path.join(exe_dir, "models", actual_path)
+                    candidates = [
+                        os.path.join(exe_dir, "models", actual_path),
+                        os.path.expanduser(os.path.join("~/.local/share/yaread/models", actual_path)),
+                        os.path.expanduser(os.path.join("~/models", actual_path)),
+                        os.path.join(os.getcwd(), "models", actual_path),
+                        os.path.join(os.getcwd(), actual_path),
+                    ]
+                    for cand in candidates:
+                        if os.path.exists(cand):
+                            actual_path = cand
+                            break
+                    else:
+                        actual_path = candidates[0]
 
                 if self.llm is None or self.current_loaded_model != actual_path:
                     if not os.path.exists(actual_path):
@@ -2883,23 +2912,24 @@ if __name__ == '__main__':
     splash.finish(window)
     window.show()
 
-    try:
-        import ctypes
-        hwnd = int(window.winId())
-        ICON_SMALL, ICON_BIG = 0, 1
-        WM_SETICON = 0x0080
-        hicon = ctypes.windll.user32.LoadImageW(
-            None,
-            icon_path if os.path.exists(icon_path) else None,
-            1,
-            0, 0,
-            0x0010 | 0x0040 
-        )
-        if hicon:
-            ctypes.windll.user32.SendMessageW(hwnd, WM_SETICON, ICON_SMALL, hicon)
-            ctypes.windll.user32.SendMessageW(hwnd, WM_SETICON, ICON_BIG, hicon)
-    except Exception as e:
-        print(f"[WARN] Taskbar icon WinAPI fallback failed: {e}")
+    if sys.platform == "win32":
+        try:
+            import ctypes
+            hwnd = int(window.winId())
+            ICON_SMALL, ICON_BIG = 0, 1
+            WM_SETICON = 0x0080
+            hicon = ctypes.windll.user32.LoadImageW(
+                None,
+                icon_path if os.path.exists(icon_path) else None,
+                1,
+                0, 0,
+                0x0010 | 0x0040 
+            )
+            if hicon:
+                ctypes.windll.user32.SendMessageW(hwnd, WM_SETICON, ICON_SMALL, hicon)
+                ctypes.windll.user32.SendMessageW(hwnd, WM_SETICON, ICON_BIG, hicon)
+        except Exception as e:
+            print(f"[WARN] Taskbar icon WinAPI fallback failed: {e}")
 
     fade_in = QPropertyAnimation(window, b"windowOpacity")
     fade_in.setDuration(350)
