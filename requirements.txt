@@ -1,5 +1,5 @@
 PyQt6>=6.4.0
-pygame>=2.5.0
+pygame>=2.6.1
 PyMuPDF>=1.23.0
 beautifulsoup4>=4.12.0
 lxml>=4.9.0
